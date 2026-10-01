@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StoryCreator - Create Stories Your Way</title>
+
+<meta name="description" content="StoryCreator is an Android creative app for creating stories and animated scenes with characters, worlds, actions, voice, music, effects and video export.">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f8fc;
+    color: #202124;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 14px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #5b35d5;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.nav-links a {
+    font-size: 14px;
+    color: #444;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #5b35d5;
+}
+
+.hero {
+    padding: 90px 6% 80px;
+    background: linear-gradient(135deg, #f1edff, #ffffff);
+}
+
+.hero-content {
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    background: #e9e2ff;
+    color: #4b2bb8;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.05;
+    color: #171717;
+}
+
+.hero h1 span {
+    color: #5b35d5;
+}
+
+.hero p {
+    max-width: 720px;
+    margin: 24px auto;
+    font-size: 19px;
+    color: #5f6368;
+}
+
+.button {
+    display: inline-block;
+    background: #5b35d5;
+    color: #ffffff;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #4928b8;
+}
+
+section {
+    padding: 75px 6%;
+}
+
+.section-container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    margin: 0 0 10px;
+    font-size: 36px;
+    color: #171717;
+}
+
+.section-title p {
+    margin: auto;
+    max-width: 700px;
+    color: #6b7280;
+}
+
+.about {
+    background: #ffffff;
+}
+
+.about-box {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+    font-size: 17px;
+    color: #4b5563;
+}
+
+.features {
+    background: #f7f8fc;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+}
+
+.card-icon {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.card p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step-number {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #5b35d5;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.step h3 {
+    margin: 0 0 8px;
+}
+
+.step p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.pricing {
+    background: #ffffff;
+}
+
+.price-card {
+    max-width: 430px;
+    margin: auto;
+    text-align: center;
+    border: 2px solid #5b35d5;
+    border-radius: 20px;
+    padding: 38px 30px;
+    box-shadow: 0 10px 35px rgba(91,53,213,0.12);
+}
+
+.price-card h3 {
+    font-size: 25px;
+    margin: 0 0 10px;
+}
+
+.price {
+    font-size: 52px;
+    font-weight: 800;
+    color: #5b35d5;
+    margin: 10px 0;
+}
+
+.price-card p {
+    color: #6b7280;
+}
+
+.price-list {
+    text-align: left;
+    padding: 0;
+    margin: 25px 0;
+    list-style: none;
+}
+
+.price-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.contact {
+    background: #f7f8fc;
+}
+
+.contact-box {
+    max-width: 700px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 35px;
+    border: 1px solid #e5e7eb;
+}
+
+.contact-item {
+    padding: 12px 0;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.policy {
+    background: #ffffff;
+}
+
+.policy-box {
+    max-width: 900px;
+    margin: auto;
+}
+
+.policy-box h3 {
+    margin-top: 28px;
+}
+
+.policy-box p,
+.policy-box li {
+    color: #5f6368;
+}
+
+.footer {
+    background: #171717;
+    color: #ffffff;
+    padding: 40px 6%;
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    color: #bdbdbd;
+    font-size: 14px;
+}
+
+.footer-links {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #dddddd;
+    font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .nav-links {
+        display: none;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    section {
+        padding: 55px 5%;
+    }
+
+    .hero {
+        padding: 70px 5% 60px;
+    }
+}
+
+@media (max-width: 500px) {
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .price {
+        font-size: 45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="logo">StoryCreator</div>
+
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+
+        <div class="badge">ANDROID CREATIVE SOFTWARE</div>
+
+        <h1>
+            Turn Your Ideas Into
+            <span>Stories.</span>
+        </h1>
+
+        <p>
+            StoryCreator is an Android app designed to help you create
+            stories and animated scenes using characters, worlds,
+            actions, voice, music, effects and video export.
+        </p>
+
+        <a class="button" href="#pricing">
+            Explore StoryCreator Pro
+        </a>
+
+    </div>
+</header>
+
+<section id="about" class="about">
+    <div class="section-container">
+
+        <div class="section-title">
+            <h2>About StoryCreator</h2>
+            <p>Creative storytelling made for Android.</p>
+        </div>
+
+        <div class="about-box">
+            <p>
+                StoryCreator is a creative Android application for people
+                who want to build their own stories and animated scenes
+                without needing traditional animation software.
+            </p>
+
+            <p>
+                Users can create scenes, place characters and objects,
+                choose character actions, add voice and audio elements,
+                apply effects, and export their finished video.
+            </p>
+
+            <p>
+                The goal of StoryCreator is to make digital storytelling
+                easier to start and accessible from a mobile device.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section id="features" class="features">
+    <div class="section-container">
+
+        <div class="section-title">
+            <h2>StoryCreator Features</h2>
+            <p>
+                Build your story step by step using the creative tools
+                available inside the application.
+            </p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="card">
+                <div class="card-icon">🌍</div>
+                <h3>Worlds & Scenes</h3>
+                <p>
+                    Create scenes using available environments and
+                    backgrounds for your story.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧑</div>
+                <h3>Characters</h3>
+                <p>
+                    Add characters to your scenes and arrange them
+                    according to your story.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🏃</div>
+                <h3>Character Actions</h3>
+                <p>
+                    Use available character actions to create movement
+                    and activity inside scenes.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🪑</div>
+                <h3>Props & Objects</h3>
+                <p>
+                    Add objects and props to make scenes more detailed
+                    and suitable for your story.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎙️</div>
+                <h3>Voice & Audio</h3>
+                <p>
+                    Add voice, music and audio elements to support
+                    your storytelling.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🎬</div>
+                <h3>Video Export</h3>
+                <p>
+                    Export your completed story or animated scene as
+                    a video for personal use and sharing.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="how-it-works">
+    <div class="section-container">
+
+        <div class="section-title">
+            <h2>How It Works</h2>
+            <p>Create a story using a simple creative workflow.</p>
+        </div>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Create a Scene</h3>
+                <p>
+                    Start with a world or scene for your story.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Add Characters</h3>
+                <p>
+                    Place characters and objects inside your scene.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Build the Story</h3>
+                <p>
+                    Use actions, voice, music and effects to develop
+                    the scene.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Export</h3>
+                <p>
+                    Export the completed creation as a video.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="pricing" class="pricing">
+    <div class="section-container">
+
+        <div class="section-title">
+            <h2>StoryCreator Pro</h2>
+            <p>
+                Access the Pro offering through a one-time digital purchase.
+            </p>
+        </div>
+
+        <div class="price-card">
+
+            <h3>StoryCreator Pro</h3>
+
+            <div class="price">₹49</div>
+
+            <p>One-time purchase</p>
+
+            <ul class="price-list">
+                <li>✓ Pro creative features</li>
+                <li>✓ Story creation tools</li>
+                <li>✓ Character and scene tools</li>
+                <li>✓ Audio and effects tools</li>
+                <li>✓ Video export</li>
+                <li>✓ No automatic recurring subscription</li>
+            </ul>
+
+            <p>
+                The StoryCreator Pro purchase is a digital purchase
+                for access to the Pro functionality provided in the app.
+            </p>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="contact" class="contact">
+    <div class="section-container">
+
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>
+                For questions about StoryCreator, purchases or support,
+                please use the contact information below.
+            </p>
+        </div>
+
+        <div class="contact-box">
+
+            <div class="contact-item">
+                <strong>Business / Developer</strong>
+                Mohammed Nasir Shaikh
+            </div>
+
+            <div class="contact-item">
+                <strong>Email</strong>
+                nashluvin@gmail.com
+            </div>
+
+            <div class="contact-item">
+                <strong>Phone</strong>
+                +91 8698734222
+            </div>
+
+            <div class="contact-item">
+                <strong>Operating Address</strong>
+                Mumbai, Maharashtra, India
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section id="privacy" class="policy">
+    <div class="policy-box">
+
+        <div class="section-title">
+            <h2>Privacy Policy</h2>
+            <p>Last updated: October 1, 2026</p>
+        </div>
+
+        <h3>1. Introduction</h3>
+        <p>
+            StoryCreator respects user privacy. This Privacy Policy
+            explains the general approach to information handled through
+            the StoryCreator application and website.
+        </p>
+
+        <h3>2. Information You Provide</h3>
+        <p>
+            Depending on the functionality you use, information may
+            include support contact information, purchase information,
+            and content that you intentionally create or import into
+            the application.
+        </p>
+
+        <h3>3. User-Created Content</h3>
+        <p>
+            StoryCreator is designed for creating stories and scenes.
+            Content created by users may be stored locally on the device
+            where the application functionality supports local storage.
+            If a future feature transmits content to a server, users
+            should be informed through the relevant feature or notice.
+        </p>
+
+        <h3>4. Payments</h3>
+        <p>
+            Payments may be processed through a third-party payment
+            service. Payment credentials are handled by the applicable
+            payment provider according to its policies and security
+            practices.
+        </p>
+
+        <h3>5. Contact</h3>
+        <p>
+            Privacy questions can be sent using the contact information
+            provided on this website.
+        </p>
+
+    </div>
+</section>
+
+<section id="terms" class="policy">
+    <div class="policy-box">
+
+        <div class="section-title">
+            <h2>Terms & Conditions</h2>
+            <p>Last updated: October 1, 2026</p>
+        </div>
+
+        <h3>1. Use of StoryCreator</h3>
+        <p>
+            StoryCreator is provided as creative software for creating
+            stories and animated scenes on supported Android devices.
+        </p>
+
+        <h3>2. User Responsibility</h3>
+        <p>
+            Users are responsible for the content they create, import,
+            publish or share using the application. Users should only
+            use content for which they have the necessary rights or
+            permissions.
+        </p>
+
+        <h3>3. Pro Access</h3>
+        <p>
+            StoryCreator Pro provides access to the Pro functionality
+            described on the applicable product or purchase page.
+            The current Pro offering is intended as a one-time digital
+            purchase and does not automatically create a recurring
+            subscription.
+        </p>
+
+        <h3>4. Availability</h3>
+        <p>
+            Features may change, be updated, or be temporarily unavailable
+            as the application is developed and maintained.
+        </p>
+
+        <h3>5. Contact</h3>
+        <p>
+            Questions regarding these Terms can be sent using the
+            contact information listed on this website.
+        </p>
+
+    </div>
+</section>
+
+<section id="refund" class="policy">
+    <div class="policy-box">
+
+        <div class="section-title">
+            <h2>Refund & Cancellation Policy</h2>
+            <p>Last updated: October 1, 2026</p>
+        </div>
+
+        <h3>1. Digital Purchase</h3>
+        <p>
+            StoryCreator Pro is a digital product. Once payment has
+            been successfully completed, Pro access may be provided
+            electronically through the application.
+        </p>
+
+        <h3>2. Payment Problems</h3>
+        <p>
+            If a payment is completed but Pro access is not provided,
+            please contact support with the payment details so the
+            transaction can be checked.
+        </p>
+
+        <h3>3. Duplicate Payments</h3>
+        <p>
+            If you believe that you were charged more than once for
+            the same purchase, contact support so the transaction can
+            be reviewed.
+        </p>
+
+        <h3>4. Refund Requests</h3>
+        <p>
+            Refund requests will be reviewed according to the applicable
+            circumstances and payment-provider requirements. Where a
+            refund is approved, it will normally be processed through
+            the original payment method where possible.
+        </p>
+
+        <h3>5. Contact</h3>
+        <p>
+            For payment or refund questions, please contact StoryCreator
+            using the contact details provided above.
+        </p>
+
+    </div>
+</section>
+
+<footer class="footer">
+
+    <div class="footer-logo">StoryCreator</div>
+
+    <p>
+        Creative storytelling software for Android.
+    </p>
+
+    <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms</a>
+        <a href="#refund">Refund Policy</a>
+    </div>
+
+    <p>
+        © 2026 StoryCreator. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>
