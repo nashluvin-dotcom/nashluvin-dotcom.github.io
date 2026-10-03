@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StoryCreator Payment</title>
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+</head>
+
+<body>
+  <h2>StoryCreator Payment</h2>
+  <p id="status">Starting secure payment...</p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const paymentSessionId =
+      params.get("payment_session_id");
+
+    const orderId =
+      params.get("order_id");
+
+    if (!paymentSessionId || !orderId) {
+      document.getElementById("status").textContent =
+        "Payment could not be started. Missing payment information.";
+    } else {
+      const cashfree = Cashfree({
+        mode: "production"
+      });
+
+      cashfree.checkout({
+        paymentSessionId: paymentSessionId,
+        redirectTarget: "_self"
+      });
+    }
+  </script>
+</body>
+</html>
